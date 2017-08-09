@@ -9,7 +9,7 @@ const initialState = fromJS({
         type: 'apple',
         faceDownImage: '',
         faceUpImage: '',
-        state: CardState.FACE_DOWN
+        cardState: CardState.FACE_DOWN
     }
 })
 
@@ -18,8 +18,8 @@ const CardReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case CardAction.TURN_CARD:
-            const newState = state.get('card').get('state') === CardState.FACE_DOWN ? CardState.FACE_UP : CardState.FACE_DOWN
-            return state.setIn(['card', 'state'], newState)
+            const newState = state.get('card').get('cardState') === CardState.FACE_DOWN ? CardState.FACE_UP : CardState.FACE_DOWN
+            return state.setIn(['card', 'cardState'], newState)
            
         default:
             return state
