@@ -1,35 +1,19 @@
-import React, { Component } from 'react'
-import GameStore from './GameStore'
+import { connect } from 'react-redux'
 import Card from './Card'
-import CardAction from './constants/CardAction'
+import CardActionCreators from './action-creators/CardActionCreators'
 
-class GameContainer extends Component {
-    constructor(...args) {
-        super(...args)
-        //GameStore.dispatch({type:'CREATE_ACCOUNT'})
-        this.state = {
-            card: GameStore.getState()
-        }
-    }
-
-    componentDidMount() {
-        this.unsubscribe = GameStore.subscribe(() => 
-            this.setState({card: GameStore.getState()})
-        )
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe()
-    }
-
-    render() {
-        return <Card
-            card = { GameStore.getState().get('card') }
-            onClick = { () => GameStore.dispatch(
-                {type: CardAction.TURN_CARD}    
-            )}
-        />
+const mapStateToProps = (state) => {
+    return {
+        card: state.get('card')
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onTurnCard: () => dispatch(CardActionCreators.turnCard())
+    }
+}
+
+const GameContainer = connect(mapStateToProps, mapDispatchToProps)(Card)
 
 export default GameContainer
