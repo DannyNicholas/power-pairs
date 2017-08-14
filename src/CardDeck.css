@@ -1,0 +1,9 @@
+.card-deck {
+  width: 800px;
+  height: 700px;
+  border-radius: 10px;
+  background-color: green;
+  margin: 10px auto 0 auto;
+  padding: 20px;
+  
+}

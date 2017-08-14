@@ -14,26 +14,23 @@ const Card = ( {card, onTurnCard} ) => {
     const CardFaceUp = () => {
         return (<img src="http://www.pro-react.com/logos/redux-bank.svg" alt="face-up" width="120" />)
     }
-
-    const handleTurnCard = () => {
-        onTurnCard();
-    }
     
     return (
         <div className="card">
             {card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
-            <button onClick={handleTurnCard.bind(this)}>Click</button>
+            <button onClick={onTurnCard.bind(this, card.get('id'))}>Click</button>
         </div>
     )  
 }
 
 Card.propTypes = {
     card: PropTypes.shape({
-        category: PropTypes.string,
-        type: PropTypes.string,
-        faceDownImage: PropTypes.string,
-        faceUpImage: PropTypes.string,
-        cardState: PropTypes.string
+        id: PropTypes.number.isRequired,
+        category: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        faceDownImage: PropTypes.string.isRequired,
+        faceUpImage: PropTypes.string.isRequired,
+        cardState: PropTypes.string.isRequired
     })
 }
 
