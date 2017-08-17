@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import CardState from './constants/CardState'
+import CardType from './constants/CardType'
 
 import './Card.css'
-import faceDownImg from './logo.svg'
 
 const Card = ( {card, onTurnCard} ) => {
 
     const CardFaceDown = () => {
         return (
             <img
-                src={faceDownImg}
-                alt="face-down"
+                src={CardType.REVERSE.image}
+                alt={CardType.REVERSE.name}
                 width="200"
                 height="250"
                 onClick={onTurnCard.bind(this, card.get('id'))}

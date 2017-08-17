@@ -7,3 +7,10 @@
   padding: 5px;
   display: inline-block;
 }
+
+.card:hover {
+  background-color: #ee2222;
+  box-shadow: 0 4px #990000;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
