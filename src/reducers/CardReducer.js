@@ -2,39 +2,40 @@ import { fromJS } from 'immutable'
  
 import CardState from '../constants/CardState'
 import CardAction from '../constants/CardAction'
+import CardType from '../constants/CardType'
 
 const initialState = fromJS({
     cards: [
         {
             id: 1,
             category: 'normal',
-            type: 'apple',
+            type: CardType.APPLE,
             faceDownImage: '',
-            faceUpImage: '',
+            faceUpImage: `faceUpImg`,
             cardState: CardState.FACE_DOWN
         },
         {
             id: 2,
             category: 'normal',
-            type: 'apple',
+            type: CardType.BANANA,
             faceDownImage: '',
-            faceUpImage: '',
+            faceUpImage: './Playing_card_heart_10.svg',
             cardState: CardState.FACE_DOWN
         },
         {
             id: 3,
             category: 'normal',
-            type: 'apple',
+            type: CardType.ORANGE,
             faceDownImage: '',
-            faceUpImage: '',
+            faceUpImage: './Playing_card_heart_10.svg',
             cardState: CardState.FACE_DOWN
         },
         {
             id: 4,
             category: 'normal',
-            type: 'apple',
+            type: CardType.APPLE,
             faceDownImage: '',
-            faceUpImage: '',
+            faceUpImage: './Playing_card_heart_10.svg',
             cardState: CardState.FACE_DOWN
         }
     ]
@@ -42,9 +43,10 @@ const initialState = fromJS({
 
 const CardReducer = (state = initialState, action) => {
     
+    console.log(action)
+
     switch (action.type) {
         case CardAction.TURN_CARD:
-
             // find index of wanted card id
             const index = state.get('cards').findIndex(card => card.get('id') === action.id)
            
@@ -52,8 +54,6 @@ const CardReducer = (state = initialState, action) => {
             const card = state.get('cards').get(index)
             const newState = card.get('cardState') === CardState.FACE_DOWN ? CardState.FACE_UP : CardState.FACE_DOWN
             const newCard = card.set('cardState', newState)
-
-            console.log(card.get('id'), newState)
 
             // replace old card
             const newCards = state.get('cards').set(index, newCard)
