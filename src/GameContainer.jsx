@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
-import Card from './Card'
+import CardDeck from './CardDeck'
 import CardActionCreators from './action-creators/CardActionCreators'
 
 const mapStateToProps = (state) => {
     return {
-        card: state.get('card')
+        cards: state.get('cards')
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTurnCard: () => dispatch(CardActionCreators.turnCard())
+        onTurnCard: (id) => dispatch(CardActionCreators.turnCard(id))
     }
 }
 
-const GameContainer = connect(mapStateToProps, mapDispatchToProps)(Card)
+const GameContainer = connect(mapStateToProps, mapDispatchToProps)(CardDeck)
 
 export default GameContainer

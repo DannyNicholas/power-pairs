@@ -1,9 +1,10 @@
 import CardAction from '../constants/CardAction'
 
 const CardActionCreators = {
-    turnCard() {
+    turnCard(id) {
        return {
-           type: CardAction.TURN_CARD
+           type: CardAction.TURN_CARD,
+           id
        }
     }
 }
