@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
+import FlipCard from 'react-flipcard'
 import CardState from './constants/CardState'
 import CardType from './constants/CardType'
 
@@ -35,7 +36,17 @@ const Card = ( {card, onTurnCard} ) => {
     
     return (
         <div className="card">
-            {card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
+            <FlipCard>
+                <div className="card">
+                    <CardFaceUp />
+                </div>
+                <div className="card">
+                    <CardFaceDown />
+                </div>
+            </FlipCard>
+            {
+                //{card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
+            }
         </div>
     )  
 }
