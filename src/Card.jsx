@@ -8,47 +8,80 @@ import CardType from './constants/CardType'
 
 import './Card.css'
 
-const Card = ( {card, onTurnCard} ) => {
 
-    const CardFaceDown = () => {
-        return (
-            <img
-                src={CardType.REVERSE.image}
-                alt={CardType.REVERSE.name}
-                width="200"
-                height="250"
-                onClick={onTurnCard.bind(this, card.get('id'))}
-            />
-        )
-    }
-
-    const CardFaceUp = () => {
-        return (
-            <img
-                src={card.get('type').get('image')}
-                alt={card.get('type').get('name')}
-                width="200"
-                height="250"
-                onClick={onTurnCard.bind(this, card.get('id'))}
-            />
-        )
+class Card extends React.Component {
+    
+    constructor() {
+        super()
+        this.state = { isFlipped: false }
     }
     
-    return (
-        <div className="card">
-            <FlipCard>
-                <div className="card">
-                    <CardFaceUp />
-                </div>
-                <div className="card">
-                    <CardFaceDown />
-                </div>
-            </FlipCard>
-            {
-                //{card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
+    render() {
+
+        const CardFaceDown = () => {
+            return (
+                <img
+                    src={CardType.REVERSE.image}
+                    alt={CardType.REVERSE.name}
+                    width="200"
+                    height="250"
+                    onClick={showFront}
+                    //onClick={this.props.onTurnCard.bind(this, this.props.card.get('id'))}
+                />
+            )
+        }
+
+        const CardFaceUp = () => {
+            return (
+                <img
+                    src={this.props.card.get('type').get('image')}
+                    alt={this.props.card.get('type').get('name')}
+                    width="200"
+                    height="250"
+                    onClick={showBack}
+                    //onClick={this.props.onTurnCard.bind(this, this.props.card.get('id'))}
+                />
+            )
+        }
+
+        const handleOnFlip = (flipped) => {
+            console.log(flipped)
+            if (flipped) {
+                //this.refs.backButton.focus();
             }
-        </div>
-    )  
+        }
+
+        const showFront = () => {
+            this.setState({
+            isFlipped: true
+            })
+        }
+        
+        const showBack = () => {
+            this.setState({
+            isFlipped: false
+            })
+        }
+    
+        return (
+            <div className="card">
+                <FlipCard
+                    disabled={ true }
+                    flipped={ this.state.isFlipped }
+                    onFlip={ handleOnFlip }>
+                        <div>
+                            <CardFaceDown />
+                        </div>
+                        <div>
+                            <CardFaceUp />
+                        </div>
+                </FlipCard>
+                {
+                    //{card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
+                }
+            </div>
+        )
+    }
 }
 
 Card.propTypes = {

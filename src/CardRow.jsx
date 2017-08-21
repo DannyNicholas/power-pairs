@@ -1,8 +1,6 @@
 import React from 'react'
 import Card from './Card'
 
-import './CardRow.css';
-
 const CardRow = ( {cards, onTurnCard} ) => {
     return (
         <div>
