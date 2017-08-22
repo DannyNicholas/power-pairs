@@ -45,7 +45,12 @@ class Card extends React.Component {
         }
 
         const handleOnFlip = (flipped) => {
-            console.log(flipped)
+
+            setTimeout(() => {
+                const logState = flipped ? "FACE UP" : "FACE DOWN"
+                console.log(this.props.card.get('id') + " flipped to " + logState)
+            },600)
+            //console.log(flipped)
             if (flipped) {
                 //this.refs.backButton.focus();
             }
