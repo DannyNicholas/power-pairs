@@ -6,6 +6,7 @@
     "immutable": "^3.8.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-flipcard": "^0.2.1",
     "react-immutable-proptypes": "^2.1.0",
     "react-redux": "^5.0.5",
     "react-scripts": "1.0.10",
@@ -18,6 +19,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "redux-devtools-extension": "^2.13.2",
     "remote-redux-devtools": "^0.5.12"
   }
 }

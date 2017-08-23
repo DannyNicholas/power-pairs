@@ -1,9 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Card from './Card'
 
-import './CardRow.css';
-
-const CardRow = ( {cards, onTurnCard} ) => {
+const CardRow = ( {cards, ...otherProps} ) => {
     return (
         <div>
             {
@@ -11,12 +10,16 @@ const CardRow = ( {cards, onTurnCard} ) => {
                     <Card
                         key={card.get('id')}
                         card={card}
-                        onTurnCard={onTurnCard}
+                        {...otherProps}
                     />
                 )
             }
         </div>
     )
+}
+
+CardRow.propTypes = {
+    cards: PropTypes.object.isRequired
 }
 
 export default CardRow

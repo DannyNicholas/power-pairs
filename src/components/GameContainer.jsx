@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import CardDeck from './CardDeck'
-import CardActionCreators from './action-creators/CardActionCreators'
+import CardActionCreators from '../action-creators/CardActionCreators'
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTurnCard: (id) => dispatch(CardActionCreators.turnCard(id))
+        onFlipCardStart: (id) => dispatch(CardActionCreators.flipCardStart(id)),
+        onFlipCardCompleted: (id) => dispatch(CardActionCreators.flipCardCompleted(id))
     }
 }
 

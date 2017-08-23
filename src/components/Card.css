@@ -1,0 +1,29 @@
+.card {
+  display: inline-block;
+}
+
+.ReactFlipCard__Front:hover {
+  background-color: #EE2020;
+  box-shadow: 0 4px #990000;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.ReactFlipCard,
+.ReactFlipCard__Front,
+.ReactFlipCard__Back {
+  width: 200px;
+  height: 250px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.ReactFlipCard__Front {
+  background-color: #eee;
+}
+
+.ReactFlipCard__Back {
+  background-color: #cef;
+}
+
