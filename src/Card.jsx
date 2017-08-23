@@ -11,9 +11,20 @@ import './Card.css'
 
 class Card extends React.Component {
     
-    constructor() {
-        super()
-        this.state = { isFlipped: false }
+    constructor(props) {
+        super(props)
+        this.state = {
+            wantedState: props.card.get('cardState')
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.card.get('isFlipping') && nextProps.card.get('nextCardState') !== this.state.wantedState) {
+            // change state to trigger the flip animation
+            this.setState({
+                 wantedState: nextProps.card.get('nextCardState')
+            })
+        }
     }
     
     render() {
@@ -25,8 +36,7 @@ class Card extends React.Component {
                     alt={CardType.REVERSE.name}
                     width="200"
                     height="250"
-                    onClick={showFront}
-                    //onClick={this.props.onTurnCard.bind(this, this.props.card.get('id'))}
+                    onClick={this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
                 />
             )
         }
@@ -38,41 +48,24 @@ class Card extends React.Component {
                     alt={this.props.card.get('type').get('name')}
                     width="200"
                     height="250"
-                    onClick={showBack}
-                    //onClick={this.props.onTurnCard.bind(this, this.props.card.get('id'))}
+                    onClick={this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
                 />
             )
         }
 
         const handleOnFlip = (flipped) => {
-
             setTimeout(() => {
                 const logState = flipped ? "FACE UP" : "FACE DOWN"
                 console.log(this.props.card.get('id') + " flipped to " + logState)
+                this.props.onFlipCardCompleted(this.props.card.get('id'))
             },600)
-            //console.log(flipped)
-            if (flipped) {
-                //this.refs.backButton.focus();
-            }
         }
 
-        const showFront = () => {
-            this.setState({
-            isFlipped: true
-            })
-        }
-        
-        const showBack = () => {
-            this.setState({
-            isFlipped: false
-            })
-        }
-    
         return (
             <div className="card">
                 <FlipCard
                     disabled={ true }
-                    flipped={ this.state.isFlipped }
+                    flipped={ this.state.wantedState === CardState.FACE_UP ? true : false }
                     onFlip={ handleOnFlip }>
                         <div>
                             <CardFaceDown />
@@ -81,9 +74,6 @@ class Card extends React.Component {
                             <CardFaceUp />
                         </div>
                 </FlipCard>
-                {
-                    //{card.get('cardState') === CardState.FACE_UP ?  <CardFaceUp /> : <CardFaceDown />}
-                }
             </div>
         )
     }
@@ -97,7 +87,9 @@ Card.propTypes = {
         faceDownImage: PropTypes.string.isRequired,
         faceUpImage: PropTypes.string.isRequired,
         cardState: PropTypes.string.isRequired
-    })
+    }),
+    onFlipCardStart: PropTypes.func.isRequired,
+    onFlipCardCompleted: PropTypes.func.isRequired
 }
 
 export default Card

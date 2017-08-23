@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-const CardRow = ( {cards, onTurnCard} ) => {
+const CardRow = ( {cards, onTurnCard, onFlipCardStart, onFlipCardCompleted} ) => {
     return (
         <div>
             {
@@ -10,6 +10,8 @@ const CardRow = ( {cards, onTurnCard} ) => {
                         key={card.get('id')}
                         card={card}
                         onTurnCard={onTurnCard}
+                        onFlipCardStart={onFlipCardStart}
+                        onFlipCardCompleted={onFlipCardCompleted}
                     />
                 )
             }

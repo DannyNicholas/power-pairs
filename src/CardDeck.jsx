@@ -4,7 +4,7 @@ import CardRow from './CardRow'
 
 import './CardDeck.css';
 
-const CardDeck = ( {cards, onTurnCard} ) => {
+const CardDeck = ( {cards, onTurnCard, onFlipCardStart, onFlipCardCompleted} ) => {
 
     // TODO provide cards in each row via props
     const cardsInRow = 2
@@ -16,12 +16,13 @@ const CardDeck = ( {cards, onTurnCard} ) => {
     return (
         <div className="card-deck">
             {
-                rowsOfCards.map(cardRow =>
+                rowsOfCards.map((cardRow, index) =>
                     <CardRow
-                        // TODO hash key??
-                        key={cardRow.toString()}
+                        key={index}
                         cards={cardRow}
                         onTurnCard={onTurnCard}
+                        onFlipCardStart={onFlipCardStart}
+                        onFlipCardCompleted={onFlipCardCompleted}
                     />
                 )
             }
