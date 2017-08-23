@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import FlipCard from 'react-flipcard'
-import CardState from './constants/CardState'
-import CardType from './constants/CardType'
+import CardState from '../constants/CardState'
+import CardType from '../constants/CardType'
 
 import './Card.css'
 
