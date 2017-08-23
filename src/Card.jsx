@@ -30,13 +30,19 @@ class Card extends React.Component {
     render() {
 
         const CardFaceDown = () => {
+            // disable click if card already started to flip
+            const cardClick = this.props.card.get('isFlipping') ?
+                {}
+                :
+                {onClick : this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
+
             return (
                 <img
                     src={CardType.REVERSE.image}
                     alt={CardType.REVERSE.name}
                     width="200"
                     height="250"
-                    onClick={this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
+                    {...cardClick}
                 />
             )
         }
@@ -54,9 +60,8 @@ class Card extends React.Component {
         }
 
         const handleOnFlip = (flipped) => {
+            // give animation time to complete before firing flip completed event
             setTimeout(() => {
-                const logState = flipped ? "FACE UP" : "FACE DOWN"
-                console.log(this.props.card.get('id') + " flipped to " + logState)
                 this.props.onFlipCardCompleted(this.props.card.get('id'))
             },600)
         }
@@ -83,7 +88,10 @@ Card.propTypes = {
     card: ImmutablePropTypes.contains({
         id: PropTypes.number.isRequired,
         category: PropTypes.string.isRequired,
-        type: PropTypes.object.isRequired,
+        type: ImmutablePropTypes.contains({
+            name: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired
+        }),
         faceDownImage: PropTypes.string.isRequired,
         faceUpImage: PropTypes.string.isRequired,
         cardState: PropTypes.string.isRequired

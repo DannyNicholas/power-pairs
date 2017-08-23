@@ -10,7 +10,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTurnCard: (id) => dispatch(CardActionCreators.turnCard(id)),
         onFlipCardStart: (id) => dispatch(CardActionCreators.flipCardStart(id)),
         onFlipCardCompleted: (id) => dispatch(CardActionCreators.flipCardCompleted(id))
     }

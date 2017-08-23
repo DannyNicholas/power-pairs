@@ -77,19 +77,6 @@ const CardReducer = (state = initialState, action) => {
     console.log(action)
 
     switch (action.type) {
-        case CardAction.TURN_CARD:
-            // find index of wanted card id
-            const index = state.get('cards').findIndex(card => card.get('id') === action.id)
-           
-            // get card and invert card state
-            const card = state.get('cards').get(index)
-            const newState = card.get('cardState') === CardState.FACE_DOWN ? CardState.FACE_UP : CardState.FACE_DOWN
-            const newCard = card.set('cardState', newState)
-
-            // replace old card
-            const newCards = state.get('cards').set(index, newCard)
-            return state.set('cards', newCards)
-
         case CardAction.FLIP_CARD_START:
             return startCardFlip(state, action)
 

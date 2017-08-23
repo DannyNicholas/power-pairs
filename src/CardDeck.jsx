@@ -1,10 +1,11 @@
 import React from 'react'
 import Immutable from 'immutable'
+import PropTypes from 'prop-types'
 import CardRow from './CardRow'
 
 import './CardDeck.css';
 
-const CardDeck = ( {cards, onTurnCard, onFlipCardStart, onFlipCardCompleted} ) => {
+const CardDeck = ( {cards, ...otherProps} ) => {
 
     // TODO provide cards in each row via props
     const cardsInRow = 2
@@ -20,9 +21,7 @@ const CardDeck = ( {cards, onTurnCard, onFlipCardStart, onFlipCardCompleted} ) =
                     <CardRow
                         key={index}
                         cards={cardRow}
-                        onTurnCard={onTurnCard}
-                        onFlipCardStart={onFlipCardStart}
-                        onFlipCardCompleted={onFlipCardCompleted}
+                        {...otherProps}
                     />
                 )
             }
@@ -34,6 +33,10 @@ const CardDeck = ( {cards, onTurnCard, onFlipCardStart, onFlipCardCompleted} ) =
 function splitIntoChunks(list, chunkSize = 1) {
   return Immutable.Range(0, list.count(), chunkSize)
     .map(chunkStart => list.slice(chunkStart, chunkStart + chunkSize));
+}
+
+CardDeck.propTypes = {
+    cards: PropTypes.object.isRequired
 }
 
 export default CardDeck
