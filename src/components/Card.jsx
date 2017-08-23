@@ -4,11 +4,21 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import FlipCard from 'react-flipcard'
 import CardState from '../constants/CardState'
-import CardType from '../constants/CardType'
+import CardFaceUp from './CardFaceUp'
+import CardFaceDown from './CardFaceDown'
 
 import './Card.css'
 
+/* Represents a flippable card.
 
+The flipping animation starts when isFlipping and nextCardState props
+are provided. This props change is triggered by the onFlipCardStart action.
+
+The card will flip from current state to next state.
+
+The onFlipCardCompleted action informs the store of the card state change after
+a flip is completed. This action is delayed to allow time for the animation
+to complete. */
 class Card extends React.Component {
     
     constructor(props) {
@@ -29,36 +39,6 @@ class Card extends React.Component {
     
     render() {
 
-        const CardFaceDown = () => {
-            // disable click if card already started to flip
-            const cardClick = this.props.card.get('isFlipping') ?
-                {}
-                :
-                {onClick : this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
-
-            return (
-                <img
-                    src={CardType.REVERSE.image}
-                    alt={CardType.REVERSE.name}
-                    width="200"
-                    height="250"
-                    {...cardClick}
-                />
-            )
-        }
-
-        const CardFaceUp = () => {
-            return (
-                <img
-                    src={this.props.card.get('type').get('image')}
-                    alt={this.props.card.get('type').get('name')}
-                    width="200"
-                    height="250"
-                    onClick={this.props.onFlipCardStart.bind(this, this.props.card.get('id'))}
-                />
-            )
-        }
-
         const handleOnFlip = (flipped) => {
             // give animation time to complete before firing flip completed event
             setTimeout(() => {
@@ -73,10 +53,13 @@ class Card extends React.Component {
                     flipped={ this.state.wantedState === CardState.FACE_UP ? true : false }
                     onFlip={ handleOnFlip }>
                         <div>
-                            <CardFaceDown />
+                            <CardFaceDown 
+                                card = { this.props.card }
+                                onFlipCardStart = { this.props.onFlipCardStart } />
                         </div>
                         <div>
-                            <CardFaceUp />
+                            <CardFaceUp
+                                cardType = { this.props.card.get('type') } />
                         </div>
                 </FlipCard>
             </div>
