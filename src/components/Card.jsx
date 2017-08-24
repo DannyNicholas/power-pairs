@@ -51,7 +51,7 @@ class Card extends React.Component {
                 <FlipCard
                     disabled={ true }
                     flipped={ this.state.wantedState === CardState.FACE_UP ? true : false }
-                    onFlip={ handleOnFlip }>
+                    onFlip={ handleOnFlip } >
                         <div>
                             <CardFaceDown 
                                 card = { this.props.card }

@@ -107,7 +107,7 @@ const revertFlippedCards = (state) => {
         faceUpCards.forEach(card => {
             newState = startCardFlip(
                 newState,
-                CardActionCreators.flipCardStart(card.get('id')))
+                CardActionCreators.flipCardStartOld(card.get('id')))
         })
         return newState
     }
@@ -123,8 +123,9 @@ const CardReducer = (state = initialState, action) => {
             return startCardFlip(state, action)
 
         case CardAction.FLIP_CARD_COMPLETED:
-            const flipCompleteState = completeCardFlip(state, action)
-            return revertFlippedCards(flipCompleteState)
+            return completeCardFlip(state, action)
+            //const flipCompleteState = completeCardFlip(state, action)
+            //return revertFlippedCards(flipCompleteState)
            
         default:
             return state
