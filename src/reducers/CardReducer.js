@@ -61,7 +61,7 @@ const startCardFlip = (state, action) => {
     // find index of wanted card id
     const index = state.get('cards').findIndex(card => card.get('id') === action.id)
     
-    // get card and add card's next state after being flipped
+    // get card and determine card's next state after being flipped
     const card = state.get('cards').get(index)
     const nextState = card.get('cardState') === CardState.FACE_DOWN ? CardState.FACE_UP : CardState.FACE_DOWN
     
@@ -124,8 +124,6 @@ const CardReducer = (state = initialState, action) => {
 
         case CardAction.FLIP_CARD_COMPLETED:
             return completeCardFlip(state, action)
-            //const flipCompleteState = completeCardFlip(state, action)
-            //return revertFlippedCards(flipCompleteState)
            
         default:
             return state
