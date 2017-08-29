@@ -3,7 +3,6 @@ import { fromJS } from 'immutable'
 import CardState from '../constants/CardState'
 import CardAction from '../constants/CardAction'
 import CardType from '../constants/CardType'
-import CardActionCreators from '../action-creators/CardActionCreators'
 
 const initialState = fromJS({
     cards: [
@@ -96,22 +95,6 @@ const completeCardFlip = (state, action) => {
     // replace old card
     const newCards = state.get('cards').set(index, newCard)
     return state.set('cards', newCards)
-}
-
-const revertFlippedCards = (state) => {
-    // if 2 are visible revert them to face-down
-    const faceUpCards = visibleCards(state.get('cards'))
-    if (faceUpCards.count() === 2) {
-        console.warn("2 cards have been flipped. Revert them.")
-        let newState = state
-        faceUpCards.forEach(card => {
-            newState = startCardFlip(
-                newState,
-                CardActionCreators.flipCardStartOld(card.get('id')))
-        })
-        return newState
-    }
-    return state
 }
 
 const CardReducer = (state = initialState, action) => {

@@ -43,7 +43,7 @@ class Card extends React.Component {
             // give animation time to complete before firing flip completed event
             setTimeout(() => {
                 this.props.onFlipCardCompleted(this.props.card.get('id'))
-            },600)
+            },1000)
         }
 
         return (
