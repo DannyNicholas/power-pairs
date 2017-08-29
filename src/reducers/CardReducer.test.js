@@ -84,8 +84,8 @@ describe('Card flip actions to reducer', () => {
         // assert new card state
         const newCard = getCard(newState.get('cards'), 3)
         expect(newCard.get('cardState')).toEqual(CardState.FACE_UP)
-        expect(newCard.get('nextCardState')).toNotExist
-        expect(newCard.get('isFlipping')).toNotExist
+        expect(newCard.toObject()).not.toHaveProperty('nextCardState')
+        expect(newCard.toObject()).not.toHaveProperty('isFlipping')
     })
 
     it('completes card flipping from up to down', () => {
@@ -95,7 +95,7 @@ describe('Card flip actions to reducer', () => {
         // assert new card state
         const newCard = getCard(newState.get('cards'), 4)
         expect(newCard.get('cardState')).toEqual(CardState.FACE_DOWN)
-        expect(newCard.get('nextCardState')).toNotExist
-        expect(newCard.get('isFlipping')).toNotExist
+        expect(newCard.toObject()).not.toHaveProperty('nextCardState')
+        expect(newCard.toObject()).not.toHaveProperty('isFlipping')
     })
 })
